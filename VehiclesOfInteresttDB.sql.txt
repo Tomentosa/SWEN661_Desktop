@@ -1,0 +1,119 @@
+/* 
+Version: 1.0 
+
+This is the database creation script for the Maryland State Police Vehicles of Interest
+application.  This script was developed to create the database using Java DB (aka Derby)
+
+Follow these steps to install the database on NetBeans:
+1. open the Services tab
+2. open Database
+3. right click on Java DB and click Start Server
+4. right click on Java DB and click Create Database
+5. enter the following data
+    Database Name: VehiclesOfInterest
+    User Name: VehiclesOfInterest
+    Password: voi
+6. once the VehiclesOfInterest database appears, right click on jdbc ... VehiclesOfInterest folder and click Execute Command.
+7. copy and paste this document into the SQL window the appears to the left
+8. click the Run SQL button
+9. scroll through output window at the bottom looking for errors.  They will be in red.
+
+*/
+
+CREATE TABLE Reason_For_Interest (
+    Reason varchar(20) Not Null,
+    Description varchar(200) Not Null,
+    PRIMARY KEY (REASON)
+);
+
+CREATE TABLE Vehicle_Make (
+    Make varchar(20) Not Null,
+    PRIMARY KEY (MAKE)
+);
+
+CREATE TABLE Vehicle_Model (
+    Model varchar(20) Not Null,
+
+    Make varchar(20) Not Null,
+    PRIMARY KEY (MODEL),
+    CONSTRAINT make_fk FOREIGN KEY (Make) REFERENCES Vehicle_Make(Make)
+);
+
+
+CREATE TABLE Vehicle_Of_Interest (
+    License_Plate varchar(20) Not Null,
+
+    Reason varchar(20) Not Null,
+
+    Make varchar(20) Not Null,
+
+    Model varchar(20) Not Null,
+
+    Veh_Year varchar(4),
+
+    Color varchar(10),
+
+    Owners_Name varchar(30),
+
+    Owners_phone varchar(10),
+
+    PRIMARY KEY (LICENSE_PLATE),
+
+    CONSTRAINT Veh_make_fk FOREIGN KEY (Make) REFERENCES Vehicle_Make(Make),
+
+    CONSTRAINT Veh_maodel_fk FOREIGN KEY (Model) REFERENCES Vehicle_Model(Model),
+
+    CONSTRAINT reason_fk FOREIGN KEY (Reason) REFERENCES Reason_For_Interest(Reason)
+);
+
+
+Insert into Reason_For_Interest (Reason, Description) values ('Silver Alert', 'Vehicle is associated to a missing elderly person.');
+
+Insert into Reason_For_Interest (Reason, Description) values ('Amber Alert', 'Vehicle is associated to a missing child');
+
+Insert into Reason_For_Interest (Reason, Description) values ('Stolen', 'Vehicle has been report stolen.');
+
+Insert into Reason_For_Interest (Reason, Description) values ('Arrest Warrant', 'The owner of the vehicle has an active arrest warrant.');
+
+
+
+Insert into Vehicle_Make (Make) values ('Chevy');
+
+Insert into Vehicle_Make (Make) values ('Ford');
+
+Insert into Vehicle_Make (Make) values ('Honda');
+
+Insert into Vehicle_Make (Make) values ('Toyota');
+
+Insert into Vehicle_Make (Make) values ('Buick');
+
+Insert into Vehicle_Make (Make) values ('Lotus');
+
+Insert into Vehicle_Make (Make) values ('BMW');
+
+Insert into Vehicle_Make (Make) values ('Mitsubiti');
+
+
+Insert into Vehicle_Model (Make, Model) values ('Chevy', 'Malibu');
+
+Insert into Vehicle_Model (Make, Model) values ('Chevy', 'Corevett');
+
+
+Insert into Vehicle_Model (Make, Model) values ('Ford', 'Tauris');
+
+Insert into Vehicle_Model (Make, Model) values ('Honda', 'Accord');
+
+Insert into Vehicle_Model (Make, Model) values ('Honda', 'Civic');
+
+Insert into Vehicle_Model (Make, Model) values ('Buick', 'Enclave');
+
+
+
+Insert into Vehicle_Of_Interest (License_Plate, Reason, Make, Model, Veh_Year, Color, Owners_Name, Owners_phone) values ('X76122', 'Silver Alert', 'Buick', 'Enclave', '2018', 'Blue', 'Grandpa Simson', '3015555555');
+
+Insert into Vehicle_Of_Interest (License_Plate, Reason, Make, Model, Veh_Year, Color, Owners_Name, Owners_phone) values ('ABC729', 'Amber Alert', 'Ford', 'Tauris', '2016', 'Red', 'Homer Simson', '3015555554');
+
+Insert into Vehicle_Of_Interest (License_Plate, Reason, Make, Model, Veh_Year, Color, Owners_Name, Owners_phone) values ('ZZZZZ', 'Arrest Warrant', 'Honda', 'Civic', '2010', 'Blue', 'Bart Simson', '3015555554');
+
+
+
