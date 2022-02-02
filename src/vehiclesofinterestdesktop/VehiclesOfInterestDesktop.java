@@ -15,8 +15,8 @@ public class VehiclesOfInterestDesktop {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+MainScreen desktop = new MainScreen();        
+desktop.show();
     }
     
 }

@@ -26,86 +26,113 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jL_ReasonCombo = new javax.swing.JLabel();
-        jCB_Reason = new javax.swing.JComboBox<>();
-        jL_ReasonText = new javax.swing.JLabel();
-        jTF_ReasonText = new javax.swing.JTextField();
-        jL_ReasonDescription = new javax.swing.JLabel();
-        jTF_ReasonDescription = new javax.swing.JTextField();
-        jB_Create = new javax.swing.JButton();
-        jB_EditSelected = new javax.swing.JButton();
-        jB_DeleteSelected = new javax.swing.JButton();
+        jL_Make = new javax.swing.JLabel();
+        jCB_Make = new javax.swing.JComboBox<>();
+        jL_Model = new javax.swing.JLabel();
+        jCB_Model = new javax.swing.JComboBox<>();
+        jL_Make2 = new javax.swing.JLabel();
+        jTF_Make = new java.awt.TextField();
+        jL_Model2 = new javax.swing.JLabel();
+        jTF_Model = new java.awt.TextField();
+        jbt_Create = new javax.swing.JButton();
+        jbt_EditSelected = new javax.swing.JButton();
+        jbt_DeleteSelected = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Make / Model");
 
-        jL_ReasonCombo.setText("Select Reason for Interest");
+        jL_Make.setText("Make");
 
-        jCB_Reason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCB_Make.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jL_ReasonText.setText("Reason");
+        jL_Model.setText("Model");
 
-        jTF_ReasonText.setText("jTextField1");
+        jCB_Model.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jL_ReasonDescription.setText("Description");
+        jL_Make2.setText("Make");
 
-        jTF_ReasonDescription.setText("jTextField2");
+        jTF_Make.setText("textField1");
 
-        jB_Create.setText("Create");
+        jL_Model2.setText("Model");
 
-        jB_EditSelected.setText("Edit Selected");
+        jTF_Model.setText("textField2");
 
-        jB_DeleteSelected.setText("Delete Selected");
+        jbt_Create.setText("Create");
+        jbt_Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_CreateActionPerformed(evt);
+            }
+        });
+
+        jbt_EditSelected.setText("Edit Selected");
+
+        jbt_DeleteSelected.setText("Delete Selected");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jL_ReasonCombo)
-                    .addComponent(jL_ReasonText)
-                    .addComponent(jL_ReasonDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCB_Reason, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTF_ReasonText, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(jTF_ReasonDescription))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jL_Make)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCB_Make, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jL_Model, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCB_Model, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbt_Create)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addComponent(jbt_EditSelected)
+                        .addGap(66, 66, 66)
+                        .addComponent(jbt_DeleteSelected)
+                        .addGap(30, 30, 30))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jB_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
-                .addComponent(jB_EditSelected)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jB_DeleteSelected)
-                .addGap(48, 48, 48))
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jL_Make2)
+                    .addComponent(jL_Model2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTF_Make, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTF_Model, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCB_Reason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_ReasonCombo))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jL_ReasonText)
-                    .addComponent(jTF_ReasonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jCB_Make, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCB_Model, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL_Make)
+                    .addComponent(jL_Model))
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_ReasonDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_ReasonDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(jL_Make2)
+                    .addComponent(jTF_Make, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTF_Model, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL_Model2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jB_Create)
-                    .addComponent(jB_EditSelected)
-                    .addComponent(jB_DeleteSelected))
-                .addGap(26, 26, 26))
+                    .addComponent(jbt_Create)
+                    .addComponent(jbt_EditSelected)
+                    .addComponent(jbt_DeleteSelected))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbt_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_CreateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbt_CreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,14 +170,16 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jB_Create;
-    private javax.swing.JButton jB_DeleteSelected;
-    private javax.swing.JButton jB_EditSelected;
-    private javax.swing.JComboBox<String> jCB_Reason;
-    private javax.swing.JLabel jL_ReasonCombo;
-    private javax.swing.JLabel jL_ReasonDescription;
-    private javax.swing.JLabel jL_ReasonText;
-    private javax.swing.JTextField jTF_ReasonDescription;
-    private javax.swing.JTextField jTF_ReasonText;
+    private javax.swing.JComboBox<String> jCB_Make;
+    private javax.swing.JComboBox<String> jCB_Model;
+    private javax.swing.JLabel jL_Make;
+    private javax.swing.JLabel jL_Make2;
+    private javax.swing.JLabel jL_Model;
+    private javax.swing.JLabel jL_Model2;
+    private java.awt.TextField jTF_Make;
+    private java.awt.TextField jTF_Model;
+    private javax.swing.JButton jbt_Create;
+    private javax.swing.JButton jbt_DeleteSelected;
+    private javax.swing.JButton jbt_EditSelected;
     // End of variables declaration//GEN-END:variables
 }

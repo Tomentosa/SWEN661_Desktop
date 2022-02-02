@@ -83,6 +83,7 @@ public class MainScreen extends javax.swing.JFrame {
         jL_ShieldImage.setIcon(shield);
 
         jB_Search.setText("Search");
+        jB_Search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tF_SearchBar.setText("textField2");
 
@@ -182,9 +183,10 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jT_VOIdata);
 
         jP_Management.setBackground(new java.awt.Color(255, 204, 0));
-        jP_Management.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jP_Management.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jB_ViewReason.setText("View");
+        jB_ViewReason.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jB_ViewReason.setPreferredSize(new java.awt.Dimension(70, 20));
         jB_ViewReason.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +195,7 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jB_ViewMakeModel.setText("View");
+        jB_ViewMakeModel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jB_ViewMakeModel.setPreferredSize(new java.awt.Dimension(70, 20));
         jB_ViewMakeModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +204,13 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jB_CreateVOI.setText("Create");
+        jB_CreateVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jB_CreateVOI.setPreferredSize(new java.awt.Dimension(70, 20));
+        jB_CreateVOI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_CreateVOIActionPerformed(evt);
+            }
+        });
 
         jL_Reason.setForeground(new java.awt.Color(0, 0, 0));
         jL_Reason.setText("Manage Reasons for Interest");
@@ -213,8 +222,10 @@ public class MainScreen extends javax.swing.JFrame {
         jL_MakeModel.setText("Manage Make / Model");
 
         jB_EditSelectedVOI.setText("Edit Selected");
+        jB_EditSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jB_DeleteSelectedVOI.setText("Delete Selected");
+        jB_DeleteSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jP_ManagementLayout = new javax.swing.GroupLayout(jP_Management);
         jP_Management.setLayout(jP_ManagementLayout);
@@ -409,12 +420,19 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMI_DeleteSelected2ActionPerformed
 
     private void jB_ViewReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewReasonActionPerformed
-        // TODO add your handling code here:
+        JF_ManageReason reason = new JF_ManageReason();
+        reason.show();
     }//GEN-LAST:event_jB_ViewReasonActionPerformed
 
     private void jB_ViewMakeModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewMakeModelActionPerformed
-        // TODO add your handling code here:
+JF_ManageMakeModel makeModel = new JF_ManageMakeModel();
+makeModel.show();
     }//GEN-LAST:event_jB_ViewMakeModelActionPerformed
+
+    private void jB_CreateVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateVOIActionPerformed
+        JF_ManageVOI createdVOI = new JF_ManageVOI();
+        createdVOI.show();
+    }//GEN-LAST:event_jB_CreateVOIActionPerformed
 
     /**
      * @param args the command line arguments
