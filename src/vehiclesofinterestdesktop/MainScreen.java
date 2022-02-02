@@ -5,11 +5,8 @@
  */
 package vehiclesofinterestdesktop;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Image;
 import javax.swing.*;
-import javax.swing.JLabel;
 
 /**
  *
@@ -37,14 +34,19 @@ public class MainScreen extends javax.swing.JFrame {
         jP_TopPanel = new java.awt.Panel();
         jL_ShieldImage = new javax.swing.JLabel();
         jB_Search = new javax.swing.JButton();
-        textField2 = new java.awt.TextField();
+        tF_SearchBar = new java.awt.TextField();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jT_VOIdata = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jP_Management = new javax.swing.JPanel();
+        jB_ViewReason = new javax.swing.JButton();
+        jB_ViewMakeModel = new javax.swing.JButton();
+        jB_CreateVOI = new javax.swing.JButton();
+        jL_Reason = new javax.swing.JLabel();
+        jL_VOI = new javax.swing.JLabel();
+        jL_MakeModel = new javax.swing.JLabel();
+        jB_EditSelectedVOI = new javax.swing.JButton();
+        jB_DeleteSelectedVOI = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jMB_TopLeftMenu = new javax.swing.JMenuBar();
@@ -82,7 +84,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jB_Search.setText("Search");
 
-        textField2.setText("textField2");
+        tF_SearchBar.setText("textField2");
 
         javax.swing.GroupLayout jP_TopPanelLayout = new javax.swing.GroupLayout(jP_TopPanel);
         jP_TopPanel.setLayout(jP_TopPanelLayout);
@@ -91,22 +93,24 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jP_TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jL_ShieldImage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 529, Short.MAX_VALUE)
+                .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         jP_TopPanelLayout.setVerticalGroup(
             jP_TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jP_TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jL_ShieldImage, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                .addComponent(jB_Search, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
-            .addGroup(jP_TopPanelLayout.createSequentialGroup()
+            .addComponent(jL_ShieldImage)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addGroup(jP_TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jLabel1.setText("Maryland State Police - Vehicle of Interest Database");
 
         jT_VOIdata.setBackground(new java.awt.Color(204, 204, 204));
         jT_VOIdata.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,45 +181,84 @@ public class MainScreen extends javax.swing.JFrame {
         jT_VOIdata.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(jT_VOIdata);
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 0));
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jP_Management.setBackground(new java.awt.Color(255, 204, 0));
+        jP_Management.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton4.setText("<html><center>Manage<br />reason for interest</center></html>");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jB_ViewReason.setText("View");
+        jB_ViewReason.setPreferredSize(new java.awt.Dimension(70, 20));
+        jB_ViewReason.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jB_ViewReasonActionPerformed(evt);
             }
         });
 
-        jButton5.setText("<html><center>Manage<br/>Make/Model List</center></html>");
+        jB_ViewMakeModel.setText("View");
+        jB_ViewMakeModel.setPreferredSize(new java.awt.Dimension(70, 20));
+        jB_ViewMakeModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ViewMakeModelActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("<html><center>Manage <br/>Vehicles of Interest</center></html>");
+        jB_CreateVOI.setText("Create");
+        jB_CreateVOI.setPreferredSize(new java.awt.Dimension(70, 20));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+        jL_Reason.setForeground(new java.awt.Color(0, 0, 0));
+        jL_Reason.setText("Manage Reasons for Interest");
+
+        jL_VOI.setForeground(new java.awt.Color(0, 0, 0));
+        jL_VOI.setText("Manage Vehicle(s) of Interest");
+
+        jL_MakeModel.setForeground(new java.awt.Color(0, 0, 0));
+        jL_MakeModel.setText("Manage Make / Model");
+
+        jB_EditSelectedVOI.setText("Edit Selected");
+
+        jB_DeleteSelectedVOI.setText("Delete Selected");
+
+        javax.swing.GroupLayout jP_ManagementLayout = new javax.swing.GroupLayout(jP_Management);
+        jP_Management.setLayout(jP_ManagementLayout);
+        jP_ManagementLayout.setHorizontalGroup(
+            jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_ManagementLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jL_Reason, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jB_ViewReason, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL_VOI, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jB_CreateVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(65, 65, 65)
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jP_ManagementLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jL_MakeModel)))
+                .addGap(111, 111, 111))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        jP_ManagementLayout.setVerticalGroup(
+            jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jP_ManagementLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jL_Reason)
+                    .addComponent(jL_VOI)
+                    .addComponent(jL_MakeModel))
+                .addGap(18, 18, 18)
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_ViewReason, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_CreateVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
-
-        jLabel1.setText("Maryland State Police - Vehicle of Interest Database");
 
         jM_File.setText("File");
 
@@ -298,18 +341,18 @@ public class MainScreen extends javax.swing.JFrame {
 
         setJMenuBar(jMB_TopLeftMenu);
 
-        jPanel3.setAlignmentX((float)(jP_TopPanel.getSize().getWidth()/2));
+        jP_Management.setAlignmentX((float)(jP_TopPanel.getSize().getWidth()/2));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1259, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
             .addComponent(jP_TopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -333,9 +376,9 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(126, 126, 126)
                                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(91, Short.MAX_VALUE))
+                                .addGap(40, 40, 40)
+                                .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(34, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,9 +408,13 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMI_DeleteSelected2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jB_ViewReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewReasonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jB_ViewReasonActionPerformed
+
+    private void jB_ViewMakeModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewMakeModelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jB_ViewMakeModelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -407,11 +454,16 @@ public class MainScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JButton jB_CreateVOI;
+    private javax.swing.JButton jB_DeleteSelectedVOI;
+    private javax.swing.JButton jB_EditSelectedVOI;
     private javax.swing.JButton jB_Search;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jB_ViewMakeModel;
+    private javax.swing.JButton jB_ViewReason;
+    private javax.swing.JLabel jL_MakeModel;
+    private javax.swing.JLabel jL_Reason;
     private javax.swing.JLabel jL_ShieldImage;
+    private javax.swing.JLabel jL_VOI;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMB_TopLeftMenu;
     private javax.swing.JMenuItem jMI_AddNew;
@@ -431,10 +483,10 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu jM_VOI2;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jP_Management;
     private java.awt.Panel jP_TopPanel;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jT_VOIdata;
-    private java.awt.TextField textField2;
+    private java.awt.TextField tF_SearchBar;
     // End of variables declaration//GEN-END:variables
 }
