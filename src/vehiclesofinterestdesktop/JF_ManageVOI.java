@@ -218,6 +218,7 @@ public class JF_ManageVOI extends javax.swing.JFrame {
             }
         });
     }
+private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -40,10 +40,25 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Make / Model");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                windowFirstOpens(evt);
+            }
+        });
 
         jL_Make.setText("Make");
 
         jCB_Make.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCB_Make.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                makeChanged(evt);
+            }
+        });
+        jCB_Make.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changedMake(evt);
+            }
+        });
 
         jL_Model.setText("Model");
 
@@ -134,6 +149,47 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbt_CreateActionPerformed
 
+    private void windowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowFirstOpens
+        // TODO add your handling code here:
+        jCB_Make.removeAllItems();
+        String[] make = voi_c.allVehicleMakeKey();
+        for (int x = 0; x < make.length; x++) {
+            jCB_Make.addItem(make[x]);
+        }
+
+        jCB_Model.removeAllItems();
+    }//GEN-LAST:event_windowFirstOpens
+
+    private void changedMake(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changedMake
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changedMake
+
+    private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
+        //Clear all items from the model list because a new make was selected
+        jCB_Model.removeAllItems();
+
+        String[] allModels = voi_c.allVehicleModelKey();
+        String[][] specificModels = voi_c.allVehicleModel();
+        System.out.println(specificModels);
+
+        for (int x = 0; x < specificModels[x][1].length(); x++) {
+            //Commented out array diagnostics
+            //Make
+            System.out.print((String) specificModels[x][1] + ' ');
+            //Model
+            System.out.println((String) specificModels[x][0]);
+
+            //This retrieves whatever make was selected from the dropdown
+            String selectedMake = jCB_Make.getItemAt(jCB_Make.getSelectedIndex());
+
+            //This reads the database table for make and add's the model to the list if the make matches
+            if (specificModels[x][1].equalsIgnoreCase(selectedMake)) {
+                jCB_Model.addItem(specificModels[x][0]);
+            }
+        }
+        System.out.println("END");
+    }//GEN-LAST:event_makeChanged
+
     /**
      * @param args the command line arguments
      */
@@ -168,7 +224,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
             }
         });
     }
-
+    private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCB_Make;
     private javax.swing.JComboBox<String> jCB_Model;

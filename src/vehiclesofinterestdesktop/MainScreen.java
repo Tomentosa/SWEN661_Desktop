@@ -468,6 +468,7 @@ makeModel.show();
             }
         });
     }
+private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;

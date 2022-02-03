@@ -37,6 +37,12 @@ public class JF_ManageReason extends javax.swing.JFrame {
         jB_DeleteSelected = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+                WindowFirstOpens(evt);
+            }
+        });
 
         jL_ReasonCombo.setText("Select Reason for Interest");
 
@@ -107,6 +113,20 @@ public class JF_ManageReason extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void WindowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowFirstOpens
+        // TODO add your handling code here:
+        jCB_Reason.removeAllItems();
+        String [] reasons = voi_c.allReasonsForInterestKey();
+        for (int x =0; x< reasons.length;x++)
+        {
+        jCB_Reason.addItem(reasons[x]);
+        }
+    }//GEN-LAST:event_WindowFirstOpens
+
     /**
      * @param args the command line arguments
      */
@@ -142,7 +162,7 @@ public class JF_ManageReason extends javax.swing.JFrame {
             }
         });
     }
-
+private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Create;
     private javax.swing.JButton jB_DeleteSelected;
