@@ -167,12 +167,17 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
         //Clear all items from the model list because a new make was selected
         jCB_Model.removeAllItems();
+        /*
+            Description:  This method returns all of the vehicle models
+            as a 2D array.  It is in the form of [row][column].  The first 
+            column is the model, second make.
+         */
 
         String[] allModels = voi_c.allVehicleModelKey();
         String[][] specificModels = voi_c.allVehicleModel();
-        System.out.println(specificModels);
 
-        for (int x = 0; x < specificModels[x][1].length(); x++) {
+        
+        for (int x = 0; x < specificModels.length; x++) {
             //Commented out array diagnostics
             //Make
             System.out.print((String) specificModels[x][1] + ' ');
