@@ -54,11 +54,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
                 makeChanged(evt);
             }
         });
-        jCB_Make.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changedMake(evt);
-            }
-        });
 
         jL_Model.setText("Model");
 
@@ -80,8 +75,18 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         });
 
         jbt_EditSelected.setText("Edit Selected");
+        jbt_EditSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_EditSelectedActionPerformed(evt);
+            }
+        });
 
         jbt_DeleteSelected.setText("Delete Selected");
+        jbt_DeleteSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_DeleteSelectedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,25 +151,39 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbt_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_CreateActionPerformed
-        //No values were entered, so the make/model are not added
-        if (jTF_Make.getText().equals("") && jTF_Model.getText().equals("")) {
+        String make = jTF_Make.getText();
+        String model=jTF_Model.getText();
+        
+        //ERROR: there is: (no make or model) OR (There is a model with no Make)
+        if ((make.equals("") && model.equals("")) || (model.length() > 0 && make.equals(""))) {
             //POPUP FOR EMPTY STRING
             System.out.println("Empty Required Values Pop-op");
+        } 
 
-            //There is a Make but no Model
-        } else if (jTF_Make.getText().length() > 0 && jTF_Model.getText().equals("")) {
-            System.out.println("Added:" + jTF_Make.getText());
+        //There is a Make but no Model
+        else if (make.length() > 0 && model.equals("")) {
             voi_c.createVehicleMake(jTF_Make.getText());
 
             //Retrieve the Database Make's from loop through the array to add 
-            String[] make = voi_c.allVehicleMakeKey();
-            for (int x = 0; x < make.length; x++) {
-                jCB_Make.addItem(make[x]);
+            String[] availableMakes = voi_c.allVehicleMakeKey();
+            for (int x = 0; x < availableMakes.length; x++) {
+                jCB_Make.addItem(availableMakes[x]);
             }
-            //Catch all else statement
-        } else {
+            System.out.println("Added:" + make);
+        }
+        
+        //There is a Make and a Model
+        else if (make.length() > 0 && model.length() > 0) {
+            voi_c.createVehicleMake(make);
+            voi_c.createVechileModel(model, make);
+            System.out.println("Added:" + make + model);
+        }
+        //Catch all else statement
+         else {
             System.out.println("something else happened");
         }
+        
+        //Housekeeping methods to clear the Checkbox and repopulate with values
         this.clearCBandTF();
         this.populateCB();
     }//GEN-LAST:event_jbt_CreateActionPerformed
@@ -173,8 +192,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         //Remove all items from the Make and Model ComboBox
         this.clearCBandTF();
         this.populateCB();
-
-
     }//GEN-LAST:event_windowFirstOpens
 
     private void clearCBandTF() {
@@ -192,28 +209,18 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         }
     }
 
-    private void changedMake(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changedMake
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changedMake
-
     private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
         //Clear all items from the model list because a new make was selected
         jCB_Model.removeAllItems();
-        /*
-            Description:  This method returns all of the vehicle models
-            as a 2D array.  It is in the form of [row][column].  The first 
-            column is the model, second make.
-         */
 
-        String[] allModels = voi_c.allVehicleModelKey();
         String[][] specificModels = voi_c.allVehicleModel();
 
         for (int x = 0; x < specificModels.length; x++) {
-            //Commented out array diagnostics
-            //Make
-            System.out.print((String) specificModels[x][1] + ' ');
-            //Model
-            System.out.println((String) specificModels[x][0]);
+//            Commented out array diagnostics
+//            Make
+//            System.out.print((String) specificModels[x][1] + ' ');
+//            Model
+//            System.out.println((String) specificModels[x][0]);
 
             //This retrieves whatever make was selected from the dropdown
             String selectedMake = jCB_Make.getItemAt(jCB_Make.getSelectedIndex());
@@ -223,8 +230,52 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
                 jCB_Model.addItem(specificModels[x][0]);
             }
         }
-        System.out.println("END");
+        this.jTF_Make.setText((String) this.jCB_Make.getSelectedItem());
+        this.jTF_Model.setText((String) this.jCB_Model.getSelectedItem());
+
     }//GEN-LAST:event_makeChanged
+
+    private void jbt_DeleteSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_DeleteSelectedActionPerformed
+        String make = null;
+        String model = null;
+        try {
+            make = jCB_Make.getSelectedItem().toString();
+            model = jCB_Model.getSelectedItem().toString();
+        } catch (Exception e) {
+            model = "";
+        }
+        
+        //ERROR: there is: (no make or model) OR (they are both null)
+        if (make.equals("") && model.equals("")||((model==null)&&(make==null)) ) {
+            //POPUP FOR EMPTY STRING
+            System.out.println("Empty Required Values Pop-op");
+        } 
+
+        //There is a Make but no Model
+        else if ((make.length() > 0 && model.equals(""))||(make.length() > 0 && model==null)) {
+            voi_c.deleteVehicleMake(make);
+            System.out.println("Deleted:" + make);
+        }
+        
+        //There is a Make and a Model
+        else if (make.length() > 0 && model.length() > 0) {
+            voi_c.deleteVehicleModel(model);
+            System.out.println("Deleted:" + model + " from the list of:"+make+"'s");
+        }
+        
+        //Catch all else statement
+         else {
+            System.out.println("something else happened");
+        }
+        
+        //Housekeeping methods to clear the Checkbox and re-populate with values
+        this.clearCBandTF();
+        this.populateCB();   
+    }//GEN-LAST:event_jbt_DeleteSelectedActionPerformed
+
+    private void jbt_EditSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_EditSelectedActionPerformed
+
+    }//GEN-LAST:event_jbt_EditSelectedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,7 +288,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("LiteAF".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -261,6 +312,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         });
     }
     private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCB_Make;
     private javax.swing.JComboBox<String> jCB_Model;

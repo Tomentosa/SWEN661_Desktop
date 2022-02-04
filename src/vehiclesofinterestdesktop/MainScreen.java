@@ -40,13 +40,13 @@ public class MainScreen extends javax.swing.JFrame {
         jT_VOIdata = new javax.swing.JTable();
         jP_Management = new javax.swing.JPanel();
         jB_ViewReason = new javax.swing.JButton();
-        jB_ViewMakeModel = new javax.swing.JButton();
         jB_CreateVOI = new javax.swing.JButton();
         jL_Reason = new javax.swing.JLabel();
         jL_VOI = new javax.swing.JLabel();
         jL_MakeModel = new javax.swing.JLabel();
         jB_EditSelectedVOI = new javax.swing.JButton();
         jB_DeleteSelectedVOI = new javax.swing.JButton();
+        jB_ViewMakeModel = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jMB_TopLeftMenu = new javax.swing.JMenuBar();
@@ -194,15 +194,6 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        jB_ViewMakeModel.setText("View");
-        jB_ViewMakeModel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jB_ViewMakeModel.setPreferredSize(new java.awt.Dimension(70, 20));
-        jB_ViewMakeModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jB_ViewMakeModelActionPerformed(evt);
-            }
-        });
-
         jB_CreateVOI.setText("Create");
         jB_CreateVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jB_CreateVOI.setPreferredSize(new java.awt.Dimension(70, 20));
@@ -227,12 +218,21 @@ public class MainScreen extends javax.swing.JFrame {
         jB_DeleteSelectedVOI.setText("Delete Selected");
         jB_DeleteSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jB_ViewMakeModel.setText("View");
+        jB_ViewMakeModel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jB_ViewMakeModel.setPreferredSize(new java.awt.Dimension(70, 20));
+        jB_ViewMakeModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ViewMakeModelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jP_ManagementLayout = new javax.swing.GroupLayout(jP_Management);
         jP_Management.setLayout(jP_ManagementLayout);
         jP_ManagementLayout.setHorizontalGroup(
             jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP_ManagementLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jL_Reason, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jB_ViewReason, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,13 +243,11 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jB_CreateVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65)
-                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jP_ManagementLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jL_MakeModel)))
-                .addGap(111, 111, 111))
+                .addGap(48, 48, 48)
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jL_MakeModel)
+                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11))
         );
         jP_ManagementLayout.setVerticalGroup(
             jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,16 +359,16 @@ public class MainScreen extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
             .addComponent(jP_TopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,9 +385,9 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(126, 126, 126)
                                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
+                                .addGap(127, 127, 127)
                                 .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(34, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,8 +423,8 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_ViewReasonActionPerformed
 
     private void jB_ViewMakeModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewMakeModelActionPerformed
-JF_ManageMakeModel makeModel = new JF_ManageMakeModel();
-makeModel.show();
+        JF_ManageMakeModel makeModel = new JF_ManageMakeModel();
+        makeModel.show();
     }//GEN-LAST:event_jB_ViewMakeModelActionPerformed
 
     private void jB_CreateVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateVOIActionPerformed
@@ -468,7 +466,7 @@ makeModel.show();
             }
         });
     }
-private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
+    private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
