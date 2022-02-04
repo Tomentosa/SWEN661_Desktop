@@ -74,6 +74,13 @@ public class MainScreen extends javax.swing.JFrame {
         setTitle("MARYLAND STATE POLICE - VEHICLES OF INTEREST");
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(javax.swing.UIManager.getDefaults().getColor("EditorPane.selectionBackground"));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 whenWindowOpens(evt);
@@ -186,6 +193,11 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jT_VOIdata.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jT_VOIdata.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voiClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jT_VOIdata);
 
         jP_Management.setBackground(new java.awt.Color(255, 204, 0));
@@ -223,6 +235,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         jB_DeleteSelectedVOI.setText("Delete Selected");
         jB_DeleteSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jB_DeleteSelectedVOI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_DeleteSelectedVOIActionPerformed(evt);
+            }
+        });
 
         jB_ViewMakeModel.setText("View");
         jB_ViewMakeModel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -249,9 +266,11 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jL_VOI))
                 .addGap(53, 53, 53)
-                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jL_MakeModel)
-                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_ManagementLayout.createSequentialGroup()
+                        .addComponent(jL_MakeModel)
+                        .addGap(19, 19, 19)))
                 .addGap(11, 11, 11))
         );
         jP_ManagementLayout.setVerticalGroup(
@@ -390,9 +409,9 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(126, 126, 126)
                                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
+                                .addGap(37, 37, 37)
                                 .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(96, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,7 +422,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMI_RefreshTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_RefreshTableActionPerformed
-        // TODO add your handling code here:
+    this.updateTable();
     }//GEN-LAST:event_jMI_RefreshTableActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -441,6 +460,28 @@ public class MainScreen extends javax.swing.JFrame {
     private void whenWindowOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_whenWindowOpens
         this.updateTable();
     }//GEN-LAST:event_whenWindowOpens
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+    this.updateTable();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void voiClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voiClicked
+        //stores the value of the row the user has clicked
+        int row = jT_VOIdata.getSelectedRow();
+        
+    }//GEN-LAST:event_voiClicked
+
+    private void jB_DeleteSelectedVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_DeleteSelectedVOIActionPerformed
+        //stores the value of the row the user has clicked
+        try {
+            int row = jT_VOIdata.getSelectedRow();
+            String licensePlate = (String) jT_VOIdata.getModel().getValueAt(row, 0);
+            voi_c.deleteVehicleOfInterest(licensePlate);
+        } catch (Exception e) {
+            System.out.println("No VOI Selected!");
+        }
+        this.updateTable();
+    }//GEN-LAST:event_jB_DeleteSelectedVOIActionPerformed
 
     private void updateTable() {
         String voiData[][] = voi_c.allVehicleOfInterest();
