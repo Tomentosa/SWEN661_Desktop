@@ -146,19 +146,51 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbt_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_CreateActionPerformed
-        // TODO add your handling code here:
+        //No values were entered, so the make/model are not added
+        if (jTF_Make.getText().equals("") && jTF_Model.getText().equals("")) {
+            //POPUP FOR EMPTY STRING
+            System.out.println("Empty Required Values Pop-op");
+
+            //There is a Make but no Model
+        } else if (jTF_Make.getText().length() > 0 && jTF_Model.getText().equals("")) {
+            System.out.println("Added:" + jTF_Make.getText());
+            voi_c.createVehicleMake(jTF_Make.getText());
+
+            //Retrieve the Database Make's from loop through the array to add 
+            String[] make = voi_c.allVehicleMakeKey();
+            for (int x = 0; x < make.length; x++) {
+                jCB_Make.addItem(make[x]);
+            }
+            //Catch all else statement
+        } else {
+            System.out.println("something else happened");
+        }
+        this.clearCBandTF();
+        this.populateCB();
     }//GEN-LAST:event_jbt_CreateActionPerformed
 
     private void windowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowFirstOpens
-        // TODO add your handling code here:
+        //Remove all items from the Make and Model ComboBox
+        this.clearCBandTF();
+        this.populateCB();
+
+
+    }//GEN-LAST:event_windowFirstOpens
+
+    private void clearCBandTF() {
         jCB_Make.removeAllItems();
+        jCB_Model.removeAllItems();
+        jTF_Make.setText("");
+        jTF_Model.setText("");
+    }
+
+    private void populateCB() {
+        //Retrieve the available Make's from the database and loop through the array to add 
         String[] make = voi_c.allVehicleMakeKey();
         for (int x = 0; x < make.length; x++) {
             jCB_Make.addItem(make[x]);
         }
-
-        jCB_Model.removeAllItems();
-    }//GEN-LAST:event_windowFirstOpens
+    }
 
     private void changedMake(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changedMake
         // TODO add your handling code here:
@@ -176,7 +208,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         String[] allModels = voi_c.allVehicleModelKey();
         String[][] specificModels = voi_c.allVehicleModel();
 
-        
         for (int x = 0; x < specificModels.length; x++) {
             //Commented out array diagnostics
             //Make
