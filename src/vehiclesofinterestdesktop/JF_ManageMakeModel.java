@@ -35,7 +35,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         jL_Model2 = new javax.swing.JLabel();
         jTF_Model = new java.awt.TextField();
         jbt_Create = new javax.swing.JButton();
-        jbt_EditSelected = new javax.swing.JButton();
         jbt_DeleteSelected = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -67,17 +66,10 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
 
         jTF_Model.setText("textField2");
 
-        jbt_Create.setText("Create");
+        jbt_Create.setText("Create New");
         jbt_Create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbt_CreateActionPerformed(evt);
-            }
-        });
-
-        jbt_EditSelected.setText("Edit Selected");
-        jbt_EditSelected.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbt_EditSelectedActionPerformed(evt);
             }
         });
 
@@ -106,9 +98,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
                         .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbt_Create)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                        .addComponent(jbt_EditSelected)
-                        .addGap(66, 66, 66)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbt_DeleteSelected)
                         .addGap(30, 30, 30))))
             .addGroup(layout.createSequentialGroup()
@@ -120,7 +110,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTF_Make, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTF_Model, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +132,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbt_Create)
-                    .addComponent(jbt_EditSelected)
                     .addComponent(jbt_DeleteSelected))
                 .addGap(18, 18, 18))
         );
@@ -273,10 +262,6 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         this.populateCB();   
     }//GEN-LAST:event_jbt_DeleteSelectedActionPerformed
 
-    private void jbt_EditSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_EditSelectedActionPerformed
-
-    }//GEN-LAST:event_jbt_EditSelectedActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -324,6 +309,5 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
     private java.awt.TextField jTF_Model;
     private javax.swing.JButton jbt_Create;
     private javax.swing.JButton jbt_DeleteSelected;
-    private javax.swing.JButton jbt_EditSelected;
     // End of variables declaration//GEN-END:variables
 }

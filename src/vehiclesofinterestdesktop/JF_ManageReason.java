@@ -31,22 +31,27 @@ public class JF_ManageReason extends javax.swing.JFrame {
         jL_ReasonText = new javax.swing.JLabel();
         jTF_ReasonText = new javax.swing.JTextField();
         jL_ReasonDescription = new javax.swing.JLabel();
-        jTF_ReasonDescription = new javax.swing.JTextField();
         jB_Create = new javax.swing.JButton();
         jB_EditSelected = new javax.swing.JButton();
         jB_DeleteSelected = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTA_ReasonDescription = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-                WindowFirstOpens(evt);
+                windowFirstOpens(evt);
             }
         });
 
         jL_ReasonCombo.setText("Select Reason for Interest");
 
         jCB_Reason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCB_Reason.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                newReasonSelected(evt);
+            }
+        });
 
         jL_ReasonText.setText("Reason");
 
@@ -54,13 +59,31 @@ public class JF_ManageReason extends javax.swing.JFrame {
 
         jL_ReasonDescription.setText("Description");
 
-        jTF_ReasonDescription.setText("jTextField2");
-
         jB_Create.setText("Create");
+        jB_Create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_CreateActionPerformed(evt);
+            }
+        });
 
-        jB_EditSelected.setText("Edit Selected");
+        jB_EditSelected.setText("Edit Selected Description");
+        jB_EditSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_EditSelectedActionPerformed(evt);
+            }
+        });
 
         jB_DeleteSelected.setText("Delete Selected");
+        jB_DeleteSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_DeleteSelectedActionPerformed(evt);
+            }
+        });
+
+        jTA_ReasonDescription.setColumns(20);
+        jTA_ReasonDescription.setRows(5);
+        jTA_ReasonDescription.setLineWrap(true);
+        jScrollPane1.setViewportView(jTA_ReasonDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,14 +99,14 @@ public class JF_ManageReason extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jCB_Reason, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTF_ReasonText, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(jTF_ReasonDescription))
+                    .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jB_Create, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jB_EditSelected)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
                 .addComponent(jB_DeleteSelected)
                 .addGap(48, 48, 48))
         );
@@ -100,9 +123,9 @@ public class JF_ManageReason extends javax.swing.JFrame {
                     .addComponent(jTF_ReasonText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_ReasonDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jL_ReasonDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(jL_ReasonDescription)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Create)
                     .addComponent(jB_EditSelected)
@@ -113,20 +136,113 @@ public class JF_ManageReason extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowOpened
+    private void windowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowFirstOpens
+        // Housekeeping code i made into a method to reduce code duplication
+        this.clearCBandTF();
+        this.populateCB();
+        
+    }//GEN-LAST:event_windowFirstOpens
 
-    private void WindowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowFirstOpens
-        // TODO add your handling code here:
-        jCB_Reason.removeAllItems();
-        String [] reasons = voi_c.allReasonsForInterestKey();
-        for (int x =0; x< reasons.length;x++)
-        {
-        jCB_Reason.addItem(reasons[x]);
+    private void newReasonSelected(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_newReasonSelected
+        String selectedReason = (String) jCB_Reason.getSelectedItem();        
+        jTF_ReasonText.setText(selectedReason);
+        
+        String[][] allReasons = voi_c.getAllReasonsForInterest();
+        
+        for (int x = 0; x < allReasons.length; x++) {
+            if ( allReasons[x][0].equalsIgnoreCase(selectedReason)) {
+                jTA_ReasonDescription.setText(allReasons[x][1]);
+            }
         }
-    }//GEN-LAST:event_WindowFirstOpens
+    }//GEN-LAST:event_newReasonSelected
 
+    private void jB_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateActionPerformed
+        String reason = jTF_ReasonText.getText();
+        String description = jTA_ReasonDescription.getText();
+        
+        //ERROR: There is no entered Reason or Description
+        if(reason.equalsIgnoreCase("")||description.equalsIgnoreCase("")){
+        System.out.println("Missing required input popup");
+        }
+        
+        else if(reason.length()>0 && description.length()>0){
+        voi_c.createReasonOfInterest(reason, description);
+        
+        //housekeeping methods to update the lists right after adding
+        this.clearCBandTF();
+        this.populateCB();
+        }
+        
+        else {
+            System.out.println("something else happened");
+        }
+
+    }//GEN-LAST:event_jB_CreateActionPerformed
+
+    private void jB_DeleteSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_DeleteSelectedActionPerformed
+    String reason = null;
+    String description = null;
+    
+        try {
+            reason = jCB_Reason.getSelectedItem().toString();
+            description = jTA_ReasonDescription.getText();
+        } catch (Exception e) {
+            reason = "";
+            description = "";
+        }
+        
+        //ERROR: there is: (no reason or description) OR (they are both null)
+        if (reason.equals("") || ((reason == null) )) {
+            //POPUP FOR EMPTY STRING
+            System.out.println("Empty Required Values Pop-op");
+        } //There is a reason but no Description
+        else if ((reason.length() > 0 )) {
+            voi_c.deleteReasonForInterestBreed(reason);
+            System.out.println("Deleted:" + reason);
+            this.clearCBandTF();
+            this.populateCB();
+        } 
+    }//GEN-LAST:event_jB_DeleteSelectedActionPerformed
+
+    private void jB_EditSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditSelectedActionPerformed
+        String reason = null;
+        String description = null;
+
+        try {
+            reason = jTF_ReasonText.getText();
+            description = jTA_ReasonDescription.getText();
+        } catch (Exception e) {
+            reason = "";
+            description = "";
+        }
+
+        //ERROR: there is: (no reason or description) OR (they are both null)
+        if (reason.equals("") || reason == null||description.equals("")||description==null) {
+            //POPUP FOR EMPTY STRING
+            System.out.println("Empty Required Values Pop-op");
+        } //There is a reason but no Description
+        else if (reason.length() > 0 && description.length() > 0) {
+            voi_c.updateReasonForInterest(reason, description);
+            
+            System.out.println("Edited to:" + reason);
+            this.clearCBandTF();
+            this.populateCB();
+        }
+    }//GEN-LAST:event_jB_EditSelectedActionPerformed
+
+    private void clearCBandTF() {
+        jCB_Reason.removeAllItems();
+        jTF_ReasonText.setText("");
+        jTA_ReasonDescription.setText("");
+    }
+
+    private void populateCB() {
+        //Retrieve the available Reasons's from the database and loop through the array to add 
+        String[] reasons = voi_c.allReasonsForInterestKey();
+        for (int x = 0; x < reasons.length; x++) {
+            jCB_Reason.addItem(reasons[x]);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -162,7 +278,8 @@ public class JF_ManageReason extends javax.swing.JFrame {
             }
         });
     }
-private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
+    private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Create;
     private javax.swing.JButton jB_DeleteSelected;
@@ -171,7 +288,8 @@ private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
     private javax.swing.JLabel jL_ReasonCombo;
     private javax.swing.JLabel jL_ReasonDescription;
     private javax.swing.JLabel jL_ReasonText;
-    private javax.swing.JTextField jTF_ReasonDescription;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTA_ReasonDescription;
     private javax.swing.JTextField jTF_ReasonText;
     // End of variables declaration//GEN-END:variables
 }

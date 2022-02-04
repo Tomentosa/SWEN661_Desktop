@@ -87,7 +87,7 @@ public class VehiclesOfInterestController {
         for (int x = 0; x < reasonOfInterestList.size(); x++)
         {
             ArrayList<String> tempList = reasonOfInterestList.get(x);
-            for (int y = 0; y < 5; y++)
+            for (int y = 0; y < 2; y++)
             {
                 String tempValue = tempList.get(y);
                 allReasonOfInteresttArr[x][y] = tempValue;
