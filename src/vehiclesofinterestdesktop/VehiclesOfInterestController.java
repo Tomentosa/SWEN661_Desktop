@@ -247,12 +247,12 @@ public class VehiclesOfInterestController {
             System.out.println("Error " + e.getMessage());
         }
         
-        String[][] allVehicleOfInterestListArr = new String[vehicleOfInterestList.size()][5];
-        
+        String[][] allVehicleOfInterestListArr = new String[vehicleOfInterestList.size()][8];
+
         for (int x = 0; x < vehicleOfInterestList.size(); x++)
         {
             ArrayList<String> tempList = vehicleOfInterestList.get(x);
-            for (int y = 0; y < 5; y++)
+            for (int y = 0; y < 8; y++)
             {
                 String tempValue = tempList.get(y);
                 allVehicleOfInterestListArr[x][y] = tempValue;

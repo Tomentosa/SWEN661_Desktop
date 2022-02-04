@@ -7,6 +7,7 @@ package vehiclesofinterestdesktop;
 
 import java.awt.Image;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -73,6 +74,11 @@ public class MainScreen extends javax.swing.JFrame {
         setTitle("MARYLAND STATE POLICE - VEHICLES OF INTEREST");
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(javax.swing.UIManager.getDefaults().getColor("EditorPane.selectionBackground"));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                whenWindowOpens(evt);
+            }
+        });
 
         jP_TopPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jP_TopPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -113,7 +119,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel1.setText("Maryland State Police - Vehicle of Interest Database");
 
-        jT_VOIdata.setBackground(new java.awt.Color(204, 204, 204));
+        jT_VOIdata.setBackground(new java.awt.Color(255, 255, 255));
         jT_VOIdata.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -236,14 +242,13 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jL_Reason, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jB_ViewReason, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                .addGap(72, 72, 72)
                 .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jL_VOI, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jB_CreateVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(48, 48, 48)
+                    .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_CreateVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL_VOI))
+                .addGap(53, 53, 53)
                 .addGroup(jP_ManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jL_MakeModel)
                     .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -431,6 +436,31 @@ public class MainScreen extends javax.swing.JFrame {
         JF_ManageVOI createdVOI = new JF_ManageVOI();
         createdVOI.show();
     }//GEN-LAST:event_jB_CreateVOIActionPerformed
+
+    private void whenWindowOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_whenWindowOpens
+        String voiData [][]=voi_c.allVehicleOfInterest();
+        
+        DefaultTableModel model = (DefaultTableModel)jT_VOIdata.getModel();
+        
+        for (int y =model.getRowCount()-1;y>=0;y--){
+        model.removeRow(y);
+        }
+        
+        for(int x=0;x<voiData.length;x++){
+        String[] row = new String[8];
+        
+        row[0]=voiData[x][0];
+        row[1]=voiData[x][1];
+        row[2]=voiData[x][2];
+        row[3]=voiData[x][3];
+        row[4]=voiData[x][4];
+        row[5]=voiData[x][5];
+        row[6]=voiData[x][6];
+        row[7]=voiData[x][7];
+        
+        model.addRow(row);
+        }
+    }//GEN-LAST:event_whenWindowOpens
 
     /**
      * @param args the command line arguments
