@@ -4,6 +4,9 @@
  */
 package vehiclesofinterestdesktop;
 
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
 /**
  *
  * @author Brian
@@ -43,15 +46,25 @@ public class JF_ManageVOI extends javax.swing.JFrame {
         jL_OwnersPhone = new javax.swing.JLabel();
         jTF_OwnersPhone = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtDone = new javax.swing.JButton();
+        jbtCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vehicle of Interest");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                windowFirstOpens(evt);
+            }
+        });
 
         jL_AlertType.setText("Alert Type");
 
         jCB_AlertType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCB_AlertType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCB_AlertTypeActionPerformed(evt);
+            }
+        });
 
         jL_LicensePlate.setText("License Plate Number");
 
@@ -60,6 +73,11 @@ public class JF_ManageVOI extends javax.swing.JFrame {
         jL_VehicleMake.setText("Vehicle Make");
 
         jCB_VehicleMake.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCB_VehicleMake.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                makeChanged(evt);
+            }
+        });
 
         jL_VehicleModel.setText("Vehicle Model");
 
@@ -83,12 +101,17 @@ public class JF_ManageVOI extends javax.swing.JFrame {
 
         jLabel1.setText("*= Optional Field");
 
-        jButton1.setText("Done");
-
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtDone.setText("Done");
+        jbtDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtDoneActionPerformed(evt);
+            }
+        });
+
+        jbtCancel.setText("Cancel");
+        jbtCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCancelActionPerformed(evt);
             }
         });
 
@@ -107,7 +130,7 @@ public class JF_ManageVOI extends javax.swing.JFrame {
                             .addComponent(jL_OwnersName, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jL_OwnersPhone, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jbtDone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(34, 34, 34))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -130,7 +153,7 @@ public class JF_ManageVOI extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jbtCancel)
                         .addGap(57, 57, 57))))
         );
         layout.setVerticalGroup(
@@ -172,21 +195,115 @@ public class JF_ManageVOI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jbtDone)
+                    .addComponent(jbtCancel))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jbtCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_jbtCancelActionPerformed
+
+    private void windowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowFirstOpens
+    //Housekeeping methods to clear and populate the CB's
+    this.clearAllInputs();
+    this.populateCB(); 
+    }//GEN-LAST:event_windowFirstOpens
+
+    private void jCB_AlertTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_AlertTypeActionPerformed
+        String selectedReason = (String) jCB_AlertType.getSelectedItem();
+   
+     }//GEN-LAST:event_jCB_AlertTypeActionPerformed
+
+    private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
+        jCB_VehicleModel.removeAllItems();
+        JF_ManageMakeModel makeModel = new JF_ManageMakeModel();
+
+        //Retrieve whatever the new selected make is
+        String selectedMake = jCB_VehicleMake.getItemAt(jCB_VehicleMake.getSelectedIndex());
+        
+        //Prepare an arraylist to accept the models from the MakeModel Class
+        ArrayList<String> models = new ArrayList<String>();
+        models = makeModel.getSpecificModel(selectedMake);
+        for(int x = 0;x<models.size();x++){
+        jCB_VehicleModel.addItem(models.get(x));
+        }
+    }//GEN-LAST:event_makeChanged
+
+    private void jbtDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDoneActionPerformed
+        String reason = null;
+        String licensePlate = null;
+        String make = null;
+        String model = null;
+        String veh_year = jTF_Year.getText();
+        String color = jTF_Color.getText();
+        String ownersName = jTF_OwnersName.getText();
+        String ownersPhone = jTF_OwnersPhone.getText();
+
+        try {
+            reason = jCB_AlertType.getSelectedItem().toString();
+            licensePlate = jTF_LicensePlateNumber.getText();
+            make = jCB_VehicleMake.getSelectedItem().toString();
+            model = jCB_VehicleModel.getSelectedItem().toString();
+                        
+        } catch (Exception e) {
+
+        }
+
+        //Error Missing Alert Type, License Plate No., Make or Model
+        if ((reason == "" || reason == null)
+                || (licensePlate.length() < 1 || licensePlate == null)
+                || (make == "" || make == null)
+                || (model == "" || model == null)) {
+            System.out.println("Missing Required Input Pop-up");
+        } else if (reason.length() > 0
+                && licensePlate.length() >= 1
+                && make.length() > 0
+                && model.length() > 0) {
+            voi_c.createVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
+            System.out.println("Added a VOI!");
+            
+            this.clearAllInputs();
+            super.dispose();
+        }
+        
+    }//GEN-LAST:event_jbtDoneActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    private void clearAllInputs(){
+    jCB_AlertType.removeAllItems();
+    jCB_VehicleMake.removeAllItems();
+    jCB_VehicleModel.removeAllItems();
+    
+    jTF_Color.setText("");
+    jTF_LicensePlateNumber.setText("");
+    jTF_OwnersName.setText("");
+    jTF_OwnersPhone.setText("");
+    jTF_OwnersPhone.setText("");
+    jTF_Year.setText("");
+    
+    }
+    
+    private void populateCB() {
+        //Populating the Alert Types
+        String[] reasons = voi_c.allReasonsForInterestKey();
+       
+        for(int x = 0; x<reasons.length;x++){
+        jCB_AlertType.addItem(reasons[x]);
+        } 
+
+        //Populate the Vehicle Makes (Models will be updated as makes are selected)
+        String[] makes = voi_c.allVehicleMakeKey();
+        for(int x=0;x<makes.length;x++){
+        jCB_VehicleMake.addItem(makes[x]);
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -218,11 +335,10 @@ public class JF_ManageVOI extends javax.swing.JFrame {
             }
         });
     }
-private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
+    
+    private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCB_AlertType;
     private javax.swing.JComboBox<String> jCB_VehicleMake;
     private javax.swing.JComboBox<String> jCB_VehicleModel;
@@ -240,5 +356,7 @@ private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
     private javax.swing.JTextField jTF_OwnersName;
     private javax.swing.JTextField jTF_OwnersPhone;
     private javax.swing.JTextField jTF_Year;
+    private javax.swing.JButton jbtCancel;
+    private javax.swing.JButton jbtDone;
     // End of variables declaration//GEN-END:variables
 }

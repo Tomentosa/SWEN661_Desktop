@@ -4,6 +4,8 @@
  */
 package vehiclesofinterestdesktop;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Brian
@@ -140,17 +142,17 @@ public class JF_ManageReason extends javax.swing.JFrame {
         // Housekeeping code i made into a method to reduce code duplication
         this.clearCBandTF();
         this.populateCB();
-        
+
     }//GEN-LAST:event_windowFirstOpens
 
     private void newReasonSelected(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_newReasonSelected
-        String selectedReason = (String) jCB_Reason.getSelectedItem();        
+        String selectedReason = (String) jCB_Reason.getSelectedItem();
         jTF_ReasonText.setText(selectedReason);
-        
+
         String[][] allReasons = voi_c.getAllReasonsForInterest();
-        
+
         for (int x = 0; x < allReasons.length; x++) {
-            if ( allReasons[x][0].equalsIgnoreCase(selectedReason)) {
+            if (allReasons[x][0].equalsIgnoreCase(selectedReason)) {
                 jTA_ReasonDescription.setText(allReasons[x][1]);
             }
         }
@@ -159,30 +161,26 @@ public class JF_ManageReason extends javax.swing.JFrame {
     private void jB_CreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateActionPerformed
         String reason = jTF_ReasonText.getText();
         String description = jTA_ReasonDescription.getText();
-        
+
         //ERROR: There is no entered Reason or Description
-        if(reason.equalsIgnoreCase("")||description.equalsIgnoreCase("")){
-        System.out.println("Missing required input popup");
-        }
-        
-        else if(reason.length()>0 && description.length()>0){
-        voi_c.createReasonOfInterest(reason, description);
-        
-        //housekeeping methods to update the lists right after adding
-        this.clearCBandTF();
-        this.populateCB();
-        }
-        
-        else {
+        if (reason.equalsIgnoreCase("") || description.equalsIgnoreCase("")) {
+            System.out.println("Missing required input popup");
+        } else if (reason.length() > 0 && description.length() > 0) {
+            voi_c.createReasonOfInterest(reason, description);
+
+            //housekeeping methods to update the lists right after adding
+            this.clearCBandTF();
+            this.populateCB();
+        } else {
             System.out.println("something else happened");
         }
 
     }//GEN-LAST:event_jB_CreateActionPerformed
 
     private void jB_DeleteSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_DeleteSelectedActionPerformed
-    String reason = null;
-    String description = null;
-    
+        String reason = null;
+        String description = null;
+
         try {
             reason = jCB_Reason.getSelectedItem().toString();
             description = jTA_ReasonDescription.getText();
@@ -190,18 +188,18 @@ public class JF_ManageReason extends javax.swing.JFrame {
             reason = "";
             description = "";
         }
-        
+
         //ERROR: there is: (no reason or description) OR (they are both null)
-        if (reason.equals("") || ((reason == null) )) {
+        if (reason.equals("") || ((reason == null))) {
             //POPUP FOR EMPTY STRING
             System.out.println("Empty Required Values Pop-op");
         } //There is a reason but no Description
-        else if ((reason.length() > 0 )) {
+        else if ((reason.length() > 0)) {
             voi_c.deleteReasonForInterestBreed(reason);
             System.out.println("Deleted:" + reason);
             this.clearCBandTF();
             this.populateCB();
-        } 
+        }
     }//GEN-LAST:event_jB_DeleteSelectedActionPerformed
 
     private void jB_EditSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditSelectedActionPerformed
@@ -217,13 +215,13 @@ public class JF_ManageReason extends javax.swing.JFrame {
         }
 
         //ERROR: there is: (no reason or description) OR (they are both null)
-        if (reason.equals("") || reason == null||description.equals("")||description==null) {
+        if (reason.equals("") || reason == null || description.equals("") || description == null) {
             //POPUP FOR EMPTY STRING
             System.out.println("Empty Required Values Pop-op");
         } //There is a reason but no Description
         else if (reason.length() > 0 && description.length() > 0) {
             voi_c.updateReasonForInterest(reason, description);
-            
+
             System.out.println("Edited to:" + reason);
             this.clearCBandTF();
             this.populateCB();
@@ -243,6 +241,14 @@ public class JF_ManageReason extends javax.swing.JFrame {
             jCB_Reason.addItem(reasons[x]);
         }
     }
+
+    public String[] getReasons() {
+        this.populateCB();
+        String[] databaseReasons = voi_c.allReasonsForInterestKey();
+
+          return databaseReasons;
+    }
+
     /**
      * @param args the command line arguments
      */

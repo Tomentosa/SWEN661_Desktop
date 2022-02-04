@@ -4,6 +4,8 @@
  */
 package vehiclesofinterestdesktop;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Brian
@@ -197,33 +199,37 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
             jCB_Make.addItem(make[x]);
         }
     }
-
+    
     private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
         //Clear all items from the model list because a new make was selected
         jCB_Model.removeAllItems();
-
-        String[][] specificModels = voi_c.allVehicleModel();
-
-        for (int x = 0; x < specificModels.length; x++) {
-//            Commented out array diagnostics
-//            Make
-//            System.out.print((String) specificModels[x][1] + ' ');
-//            Model
-//            System.out.println((String) specificModels[x][0]);
-
-            //This retrieves whatever make was selected from the dropdown
-            String selectedMake = jCB_Make.getItemAt(jCB_Make.getSelectedIndex());
-
-            //This reads the database table for make and add's the model to the list if the make matches
-            if (specificModels[x][1].equalsIgnoreCase(selectedMake)) {
-                jCB_Model.addItem(specificModels[x][0]);
-            }
-        }
-        this.jTF_Make.setText((String) this.jCB_Make.getSelectedItem());
+        
+        //Retrieve whatever the new selected make is
+        String selectedMake = jCB_Make.getItemAt(jCB_Make.getSelectedIndex());
+        
+        //Retrieve the models associated with that Make/add to Combo box
+        this.getSpecificModel(selectedMake);
+        
+        //Update the text fields with whatever is in the Combo boxes as selected
+        this.jTF_Make.setText(selectedMake);
         this.jTF_Model.setText((String) this.jCB_Model.getSelectedItem());
-
     }//GEN-LAST:event_makeChanged
 
+    public ArrayList<String> getSpecificModel(String make) {
+
+        ArrayList<String> specificModels = new ArrayList<String>();
+        String[][] dbMakeModels = voi_c.allVehicleModel();
+
+        for (int x = 0; x < dbMakeModels.length; x++) {
+            //This reads the database table for make and add's the model to the list if the make matches
+            if (dbMakeModels[x][1].equalsIgnoreCase(make)) {
+                jCB_Model.addItem(dbMakeModels[x][0]);
+                specificModels.add(dbMakeModels[x][0]);
+            }
+        }
+        return specificModels;
+    }
+    
     private void jbt_DeleteSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_DeleteSelectedActionPerformed
         String make = null;
         String model = null;
@@ -262,6 +268,9 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         this.populateCB();   
     }//GEN-LAST:event_jbt_DeleteSelectedActionPerformed
 
+    public String [][] getMakesModels(){
+    return voi_c.allVehicleModel();
+    }
     /**
      * @param args the command line arguments
      */

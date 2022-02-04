@@ -435,33 +435,37 @@ public class MainScreen extends javax.swing.JFrame {
     private void jB_CreateVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateVOIActionPerformed
         JF_ManageVOI createdVOI = new JF_ManageVOI();
         createdVOI.show();
+        this.updateTable(); 
     }//GEN-LAST:event_jB_CreateVOIActionPerformed
 
     private void whenWindowOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_whenWindowOpens
-        String voiData [][]=voi_c.allVehicleOfInterest();
-        
-        DefaultTableModel model = (DefaultTableModel)jT_VOIdata.getModel();
-        
-        for (int y =model.getRowCount()-1;y>=0;y--){
-        model.removeRow(y);
-        }
-        
-        for(int x=0;x<voiData.length;x++){
-        String[] row = new String[8];
-        
-        row[0]=voiData[x][0];
-        row[1]=voiData[x][1];
-        row[2]=voiData[x][2];
-        row[3]=voiData[x][3];
-        row[4]=voiData[x][4];
-        row[5]=voiData[x][5];
-        row[6]=voiData[x][6];
-        row[7]=voiData[x][7];
-        
-        model.addRow(row);
-        }
+        this.updateTable();
     }//GEN-LAST:event_whenWindowOpens
 
+    private void updateTable() {
+        String voiData[][] = voi_c.allVehicleOfInterest();
+
+        DefaultTableModel model = (DefaultTableModel) jT_VOIdata.getModel();
+
+        for (int y = model.getRowCount() - 1; y >= 0; y--) {
+            model.removeRow(y);
+        }
+
+        for (int x = 0; x < voiData.length; x++) {
+            String[] row = new String[8];
+
+            row[0] = voiData[x][0];
+            row[1] = voiData[x][1];
+            row[2] = voiData[x][2];
+            row[3] = voiData[x][3];
+            row[4] = voiData[x][4];
+            row[5] = voiData[x][5];
+            row[6] = voiData[x][6];
+            row[7] = voiData[x][7];
+
+            model.addRow(row);
+        }
+}
     /**
      * @param args the command line arguments
      */
