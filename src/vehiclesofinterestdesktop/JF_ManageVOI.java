@@ -19,6 +19,22 @@ public class JF_ManageVOI extends javax.swing.JFrame {
     public JF_ManageVOI() {
         initComponents();
     }
+    public JF_ManageVOI(String licensePlate, String reason, String make, String model, String veh_year, String color, String ownersName, String ownersPhone) {
+        initComponents();
+        
+        System.out.println("Recieved Values: " + licensePlate + reason + ", " + make + ", " + model + ", " + veh_year + ", " + color + ", " + ownersName + ", " + ownersPhone);
+        //Setting the text fields first
+        jTF_Color.setText(color);
+        jTF_LicensePlateNumber.setText(licensePlate);
+        jTF_OwnersName.setText(ownersName);
+        jTF_OwnersPhone.setText(ownersPhone);
+
+        //Selecting the correct drop down options
+//        jCB_AlertType.setSelectedItem(reason);
+//        jCB_VehicleMake.setSelectedItem(make);
+//        jCB_VehicleModel.setSelectedItem(model);
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

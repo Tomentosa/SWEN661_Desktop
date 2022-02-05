@@ -109,8 +109,8 @@ public class MainScreen extends javax.swing.JFrame {
                 .addComponent(jL_ShieldImage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 529, Short.MAX_VALUE)
                 .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         jP_TopPanelLayout.setVerticalGroup(
@@ -193,14 +193,10 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         jT_VOIdata.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jT_VOIdata.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                voiClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jT_VOIdata);
 
         jP_Management.setBackground(new java.awt.Color(255, 204, 0));
+        jP_Management.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jP_Management.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jB_ViewReason.setText("View");
@@ -232,6 +228,11 @@ public class MainScreen extends javax.swing.JFrame {
 
         jB_EditSelectedVOI.setText("Edit Selected");
         jB_EditSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jB_EditSelectedVOI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_EditSelectedVOIActionPerformed(evt);
+            }
+        });
 
         jB_DeleteSelectedVOI.setText("Delete Selected");
         jB_DeleteSelectedVOI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -288,8 +289,8 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jB_ViewMakeModel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_EditSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jB_DeleteSelectedVOI, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -411,7 +412,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(96, Short.MAX_VALUE))
+                        .addContainerGap(90, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -465,12 +466,6 @@ public class MainScreen extends javax.swing.JFrame {
     this.updateTable();
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void voiClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voiClicked
-        //stores the value of the row the user has clicked
-        int row = jT_VOIdata.getSelectedRow();
-        
-    }//GEN-LAST:event_voiClicked
-
     private void jB_DeleteSelectedVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_DeleteSelectedVOIActionPerformed
         //stores the value of the row the user has clicked
         try {
@@ -482,6 +477,23 @@ public class MainScreen extends javax.swing.JFrame {
         }
         this.updateTable();
     }//GEN-LAST:event_jB_DeleteSelectedVOIActionPerformed
+
+    private void jB_EditSelectedVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditSelectedVOIActionPerformed
+        int row = jT_VOIdata.getSelectedRow();
+        String alertType = jT_VOIdata.getModel().getValueAt(row, 0).toString();
+        String licensePlate = jT_VOIdata.getModel().getValueAt(row, 1).toString();
+        String make = jT_VOIdata.getModel().getValueAt(row, 2).toString();
+        String model =  jT_VOIdata.getModel().getValueAt(row, 3).toString();
+        String year = jT_VOIdata.getModel().getValueAt(row, 4).toString();
+        String color = jT_VOIdata.getModel().getValueAt(row, 5).toString();
+        String ownersName =  jT_VOIdata.getModel().getValueAt(row, 6).toString();
+        String ownersPhone = jT_VOIdata.getModel().getValueAt(row, 7).toString();
+
+        System.out.println("Sent Values: "+licensePlate+", "+alertType+", "+make+", "+model+", "+year+", "+color+", "+ownersName+", "+ownersPhone);
+        JF_ManageVOI createdVOI = new JF_ManageVOI(licensePlate, alertType, make, model, year, color, ownersName, ownersPhone);
+        createdVOI.show();
+
+    }//GEN-LAST:event_jB_EditSelectedVOIActionPerformed
 
     private void updateTable() {
         String voiData[][] = voi_c.allVehicleOfInterest();
