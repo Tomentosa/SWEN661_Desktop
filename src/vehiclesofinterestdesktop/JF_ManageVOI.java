@@ -6,6 +6,7 @@ package vehiclesofinterestdesktop;
 
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,6 @@ public class JF_ManageVOI extends javax.swing.JFrame {
         this.clearAllInputs();
         windowState=1;
 
-        System.out.println("Recieved Values: " + licensePlate+ ", " + reason + ", " + make + ", " + model + ", " + veh_year + ", " + color + ", " + ownersName + ", " + ownersPhone);
         //Setting the text fields first
         jTF_LicensePlateNumber.setText(licensePlate);
         jTF_Year.setText(veh_year);
@@ -287,17 +287,17 @@ public class JF_ManageVOI extends javax.swing.JFrame {
                 || (licensePlate.length() < 1 || licensePlate == null)
                 || (make == "" || make == null)
                 || (model == "" || model == null)) {
-            System.out.println("Missing Required Input Pop-up");
+            JOptionPane.showMessageDialog(this,"Missing required field");
         } else if (reason.length() > 0
                 && licensePlate.length() >= 1
                 && make.length() > 0
                 && model.length() > 0) {
             if (windowState == 0) {
                 voi_c.createVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
-                System.out.println("Added a VOI! and creating new VOI");
+                JOptionPane.showMessageDialog(this,"Added a VOI!");
             } else if (windowState==1) {
                 voi_c.updateVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
-                System.out.println("Updated a VOI!");
+                JOptionPane.showMessageDialog(this,"Updated a VOI!");
             }
 
             this.clearAllInputs();

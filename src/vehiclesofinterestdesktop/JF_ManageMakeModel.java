@@ -5,6 +5,7 @@
 package vehiclesofinterestdesktop;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,7 +150,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         //ERROR: there is: (no make or model) OR (There is a model with no Make)
         if ((make.equals("") && model.equals("")) || (model.length() > 0 && make.equals(""))) {
             //POPUP FOR EMPTY STRING
-            System.out.println("Empty Required Values Pop-op");
+            JOptionPane.showMessageDialog(this,"Missing Required Field");
         } 
 
         //There is a Make but no Model
@@ -161,18 +162,18 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
             for (int x = 0; x < availableMakes.length; x++) {
                 jCB_Make.addItem(availableMakes[x]);
             }
-            System.out.println("Added:" + make);
+            JOptionPane.showMessageDialog(this, "Added:" + make);
         }
         
         //There is a Make and a Model
         else if (make.length() > 0 && model.length() > 0) {
             voi_c.createVehicleMake(make);
             voi_c.createVechileModel(model, make);
-            System.out.println("Added:" + make + model);
+            JOptionPane.showMessageDialog(this, "Added:" + make + "-" + model);
         }
         //Catch all else statement
-         else {
-            System.out.println("something else happened");
+        else {
+            JOptionPane.showMessageDialog(this, "Something else happened, try again");
         }
         
         //Housekeeping methods to clear the Checkbox and repopulate with values
@@ -242,26 +243,26 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
         }
         
         //ERROR: there is: (no make or model) OR (they are both null)
-        if (make.equals("") && model.equals("")||((model==null)&&(make==null)) ) {
+        if (make.equals("") && model.equals("") || ((model == null) && (make == null))) {
             //POPUP FOR EMPTY STRING
-            System.out.println("Empty Required Values Pop-op");
-        } 
+            JOptionPane.showMessageDialog(this, "Missing required field");
+        }
 
         //There is a Make but no Model
         else if ((make.length() > 0 && model.equals(""))||(make.length() > 0 && model==null)) {
             voi_c.deleteVehicleMake(make);
-            System.out.println("Deleted:" + make);
+            JOptionPane.showMessageDialog(this,"Deleted:" + make);
         }
         
         //There is a Make and a Model
         else if (make.length() > 0 && model.length() > 0) {
             voi_c.deleteVehicleModel(model);
-            System.out.println("Deleted:" + model + " from the list of:"+make+"'s");
+            JOptionPane.showMessageDialog(this,"Deleted:" + model + " from the list of:"+make+"'s");
         }
         
         //Catch all else statement
-         else {
-            System.out.println("something else happened");
+        else {
+            JOptionPane.showMessageDialog(this, "Something else happened, try again");
         }
         
         //Housekeeping methods to clear the Checkbox and re-populate with values

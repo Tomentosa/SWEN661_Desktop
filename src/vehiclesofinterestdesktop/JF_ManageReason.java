@@ -5,6 +5,7 @@
 package vehiclesofinterestdesktop;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -165,7 +166,7 @@ public class JF_ManageReason extends javax.swing.JFrame {
 
         //ERROR: There is no entered Reason or Description
         if (reason.equalsIgnoreCase("") || description.equalsIgnoreCase("")) {
-            System.out.println("Missing required input popup");
+            JOptionPane.showMessageDialog(this,"Missing required field");
         } else if (reason.length() > 0 && description.length() > 0) {
             voi_c.createReasonOfInterest(reason, description);
 
@@ -173,7 +174,7 @@ public class JF_ManageReason extends javax.swing.JFrame {
             this.clearCBandTF();
             this.populateCB();
         } else {
-            System.out.println("something else happened");
+            JOptionPane.showMessageDialog(this,"Something else happened, try again");
         }
 
     }//GEN-LAST:event_jB_CreateActionPerformed
@@ -193,11 +194,11 @@ public class JF_ManageReason extends javax.swing.JFrame {
         //ERROR: there is: (no reason or description) OR (they are both null)
         if (reason.equals("") || ((reason == null))) {
             //POPUP FOR EMPTY STRING
-            System.out.println("Empty Required Values Pop-op");
+            JOptionPane.showMessageDialog(this,"Empty required field");
         } //There is a reason but no Description
         else if ((reason.length() > 0)) {
             voi_c.deleteReasonForInterestBreed(reason);
-            System.out.println("Deleted:" + reason);
+            JOptionPane.showMessageDialog(this,"Deleted:" + reason);
             this.clearCBandTF();
             this.populateCB();
         }
@@ -218,12 +219,12 @@ public class JF_ManageReason extends javax.swing.JFrame {
         //ERROR: there is: (no reason or description) OR (they are both null)
         if (reason.equals("") || reason == null || description.equals("") || description == null) {
             //POPUP FOR EMPTY STRING
-            System.out.println("Empty Required Values Pop-op");
+            JOptionPane.showMessageDialog(this,"Empty required field");
         } //There is a reason but no Description
         else if (reason.length() > 0 && description.length() > 0) {
             voi_c.updateReasonForInterest(reason, description);
 
-            System.out.println("Edited to:" + reason);
+            JOptionPane.showMessageDialog(this,"Edited description for " + reason+" to:\n"+description);
             this.clearCBandTF();
             this.populateCB();
         }

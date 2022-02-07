@@ -472,7 +472,7 @@ public class MainScreen extends javax.swing.JFrame {
             String licensePlate = (String) jT_VOIdata.getModel().getValueAt(row, 0);
             voi_c.deleteVehicleOfInterest(licensePlate);
         } catch (Exception e) {
-            System.out.println("No VOI Selected!");
+            JOptionPane.showMessageDialog(this,"No VOI Selected!");
         }
         this.updateTable();
     }//GEN-LAST:event_jB_DeleteSelectedVOIActionPerformed
@@ -488,9 +488,6 @@ public class MainScreen extends javax.swing.JFrame {
         String color        = jT_VOIdata.getModel().getValueAt(row, 5).toString();
         String ownersName   = jT_VOIdata.getModel().getValueAt(row, 6).toString();
         String ownersPhone  = jT_VOIdata.getModel().getValueAt(row, 7).toString();
-
-        System.out.println("Sent Values: " + licensePlate + ", " + alertType + ", " + make + ", " + model + ", " + year + ", " + color + ", " + ownersName + ", " + ownersPhone);
-
 
         JF_ManageVOI createdVOI = new JF_ManageVOI(licensePlate, alertType, make, model, year, color, ownersName, ownersPhone);
         createdVOI.show();
