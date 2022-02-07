@@ -18,22 +18,36 @@ public class JF_ManageVOI extends javax.swing.JFrame {
      */
     public JF_ManageVOI() {
         initComponents();
+        setLocationRelativeTo(null);
+        this.clearAllInputs();
+        this.populateCB();
+        
+        //This indicates that the window is creating a new VOI
+        windowState=0;
     }
+
     public JF_ManageVOI(String licensePlate, String reason, String make, String model, String veh_year, String color, String ownersName, String ownersPhone) {
         initComponents();
+        setLocationRelativeTo(null);
         
-        System.out.println("Recieved Values: " + licensePlate + reason + ", " + make + ", " + model + ", " + veh_year + ", " + color + ", " + ownersName + ", " + ownersPhone);
+        //This indicates that the window is creating a new VOI
+        this.clearAllInputs();
+        windowState=1;
+
+        System.out.println("Recieved Values: " + licensePlate+ ", " + reason + ", " + make + ", " + model + ", " + veh_year + ", " + color + ", " + ownersName + ", " + ownersPhone);
         //Setting the text fields first
-        jTF_Color.setText(color);
         jTF_LicensePlateNumber.setText(licensePlate);
+        jTF_Year.setText(veh_year);
+        jTF_Color.setText(color);
         jTF_OwnersName.setText(ownersName);
         jTF_OwnersPhone.setText(ownersPhone);
 
         //Selecting the correct drop down options
-//        jCB_AlertType.setSelectedItem(reason);
-//        jCB_VehicleMake.setSelectedItem(make);
-//        jCB_VehicleModel.setSelectedItem(model);
-
+        this.populateCB();
+        
+        jCB_AlertType.setSelectedItem(reason.trim());
+        jCB_VehicleMake.setSelectedItem(make);
+        jCB_VehicleModel.setSelectedItem(model);
     }
 
     /**
@@ -224,14 +238,13 @@ public class JF_ManageVOI extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtCancelActionPerformed
 
     private void windowFirstOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowFirstOpens
-    //Housekeeping methods to clear and populate the CB's
-    this.clearAllInputs();
-    this.populateCB(); 
+        //Housekeeping methods to clear and populate the CB's
+        //this.populateCB();
+
     }//GEN-LAST:event_windowFirstOpens
 
     private void jCB_AlertTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_AlertTypeActionPerformed
         String selectedReason = (String) jCB_AlertType.getSelectedItem();
-   
      }//GEN-LAST:event_jCB_AlertTypeActionPerformed
 
     private void makeChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_makeChanged
@@ -240,12 +253,12 @@ public class JF_ManageVOI extends javax.swing.JFrame {
 
         //Retrieve whatever the new selected make is
         String selectedMake = jCB_VehicleMake.getItemAt(jCB_VehicleMake.getSelectedIndex());
-        
+
         //Prepare an arraylist to accept the models from the MakeModel Class
         ArrayList<String> models = new ArrayList<String>();
         models = makeModel.getSpecificModel(selectedMake);
-        for(int x = 0;x<models.size();x++){
-        jCB_VehicleModel.addItem(models.get(x));
+        for (int x = 0; x < models.size(); x++) {
+            jCB_VehicleModel.addItem(models.get(x));
         }
     }//GEN-LAST:event_makeChanged
 
@@ -264,7 +277,7 @@ public class JF_ManageVOI extends javax.swing.JFrame {
             licensePlate = jTF_LicensePlateNumber.getText();
             make = jCB_VehicleMake.getSelectedItem().toString();
             model = jCB_VehicleModel.getSelectedItem().toString();
-                        
+
         } catch (Exception e) {
 
         }
@@ -279,47 +292,52 @@ public class JF_ManageVOI extends javax.swing.JFrame {
                 && licensePlate.length() >= 1
                 && make.length() > 0
                 && model.length() > 0) {
-            voi_c.createVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
-            System.out.println("Added a VOI!");
-            
+            if (windowState == 0) {
+                voi_c.createVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
+                System.out.println("Added a VOI! and creating new VOI");
+            } else if (windowState==1) {
+                voi_c.updateVehicleOfInterest(licensePlate, reason, make, model, veh_year, color, ownersName, ownersPhone);
+                System.out.println("Updated a VOI!");
+            }
+
             this.clearAllInputs();
             super.dispose();
         }
-        
+
     }//GEN-LAST:event_jbtDoneActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    private void clearAllInputs(){
-    jCB_AlertType.removeAllItems();
-    jCB_VehicleMake.removeAllItems();
-    jCB_VehicleModel.removeAllItems();
-    
-    jTF_Color.setText("");
-    jTF_LicensePlateNumber.setText("");
-    jTF_OwnersName.setText("");
-    jTF_OwnersPhone.setText("");
-    jTF_OwnersPhone.setText("");
-    jTF_Year.setText("");
-    
+    private void clearAllInputs() {
+        jCB_AlertType.removeAllItems();
+        jCB_VehicleMake.removeAllItems();
+        jCB_VehicleModel.removeAllItems();
+
+        jTF_Color.setText("");
+        jTF_LicensePlateNumber.setText("");
+        jTF_OwnersName.setText("");
+        jTF_OwnersPhone.setText("");
+        jTF_OwnersPhone.setText("");
+        jTF_Year.setText("");
+
     }
-    
+
     private void populateCB() {
         //Populating the Alert Types
         String[] reasons = voi_c.allReasonsForInterestKey();
-       
-        for(int x = 0; x<reasons.length;x++){
-        jCB_AlertType.addItem(reasons[x]);
-        } 
+
+        for (int x = 0; x < reasons.length; x++) {
+            jCB_AlertType.addItem(reasons[x]);
+        }
 
         //Populate the Vehicle Makes (Models will be updated as makes are selected)
         String[] makes = voi_c.allVehicleMakeKey();
-        for(int x=0;x<makes.length;x++){
-        jCB_VehicleMake.addItem(makes[x]);
+        for (int x = 0; x < makes.length; x++) {
+            jCB_VehicleMake.addItem(makes[x]);
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -351,7 +369,7 @@ public class JF_ManageVOI extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private VehiclesOfInterestController voi_c = new VehiclesOfInterestController();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -375,4 +393,6 @@ public class JF_ManageVOI extends javax.swing.JFrame {
     private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtDone;
     // End of variables declaration//GEN-END:variables
+    //this will tell me if I am creating a voi (window state 0), or editing a VOI (window state 1)
+    private int windowState;
 }

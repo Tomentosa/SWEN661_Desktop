@@ -17,6 +17,7 @@ public class JF_ManageMakeModel extends javax.swing.JFrame {
      */
     public JF_ManageMakeModel() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

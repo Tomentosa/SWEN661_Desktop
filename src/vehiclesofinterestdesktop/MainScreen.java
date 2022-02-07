@@ -181,7 +181,7 @@ public class MainScreen extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Alert Type", "License Plate", "Make", "Model", "Year", "Color", "Owners Name", "Owners Phone"
+                "License Plate", "Alert Type", "Make", "Model", "Year", "Color", "Owners Name", "Owners Phone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -423,7 +423,7 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMI_RefreshTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_RefreshTableActionPerformed
-    this.updateTable();
+        this.updateTable();
     }//GEN-LAST:event_jMI_RefreshTableActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -455,7 +455,6 @@ public class MainScreen extends javax.swing.JFrame {
     private void jB_CreateVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CreateVOIActionPerformed
         JF_ManageVOI createdVOI = new JF_ManageVOI();
         createdVOI.show();
-        this.updateTable(); 
     }//GEN-LAST:event_jB_CreateVOIActionPerformed
 
     private void whenWindowOpens(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_whenWindowOpens
@@ -463,7 +462,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_whenWindowOpens
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-    this.updateTable();
+        this.updateTable();
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void jB_DeleteSelectedVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_DeleteSelectedVOIActionPerformed
@@ -480,16 +479,19 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jB_EditSelectedVOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditSelectedVOIActionPerformed
         int row = jT_VOIdata.getSelectedRow();
-        String alertType = jT_VOIdata.getModel().getValueAt(row, 0).toString();
-        String licensePlate = jT_VOIdata.getModel().getValueAt(row, 1).toString();
-        String make = jT_VOIdata.getModel().getValueAt(row, 2).toString();
-        String model =  jT_VOIdata.getModel().getValueAt(row, 3).toString();
-        String year = jT_VOIdata.getModel().getValueAt(row, 4).toString();
-        String color = jT_VOIdata.getModel().getValueAt(row, 5).toString();
-        String ownersName =  jT_VOIdata.getModel().getValueAt(row, 6).toString();
-        String ownersPhone = jT_VOIdata.getModel().getValueAt(row, 7).toString();
+        
+        String alertType    = jT_VOIdata.getModel().getValueAt(row, 1).toString();
+        String licensePlate = jT_VOIdata.getModel().getValueAt(row, 0).toString();
+        String make         = jT_VOIdata.getModel().getValueAt(row, 2).toString();
+        String model        = jT_VOIdata.getModel().getValueAt(row, 3).toString();
+        String year         = jT_VOIdata.getModel().getValueAt(row, 4).toString();
+        String color        = jT_VOIdata.getModel().getValueAt(row, 5).toString();
+        String ownersName   = jT_VOIdata.getModel().getValueAt(row, 6).toString();
+        String ownersPhone  = jT_VOIdata.getModel().getValueAt(row, 7).toString();
 
-        System.out.println("Sent Values: "+licensePlate+", "+alertType+", "+make+", "+model+", "+year+", "+color+", "+ownersName+", "+ownersPhone);
+        System.out.println("Sent Values: " + licensePlate + ", " + alertType + ", " + make + ", " + model + ", " + year + ", " + color + ", " + ownersName + ", " + ownersPhone);
+
+
         JF_ManageVOI createdVOI = new JF_ManageVOI(licensePlate, alertType, make, model, year, color, ownersName, ownersPhone);
         createdVOI.show();
 
@@ -518,7 +520,8 @@ public class MainScreen extends javax.swing.JFrame {
 
             model.addRow(row);
         }
-}
+    }
+
     /**
      * @param args the command line arguments
      */

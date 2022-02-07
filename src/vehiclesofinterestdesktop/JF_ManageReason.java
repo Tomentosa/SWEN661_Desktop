@@ -17,6 +17,7 @@ public class JF_ManageReason extends javax.swing.JFrame {
      */
     public JF_ManageReason() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -246,7 +247,7 @@ public class JF_ManageReason extends javax.swing.JFrame {
         this.populateCB();
         String[] databaseReasons = voi_c.allReasonsForInterestKey();
 
-          return databaseReasons;
+        return databaseReasons;
     }
 
     /**
