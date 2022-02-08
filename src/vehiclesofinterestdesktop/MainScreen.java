@@ -35,7 +35,7 @@ public class MainScreen extends javax.swing.JFrame {
         jP_TopPanel = new java.awt.Panel();
         jL_ShieldImage = new javax.swing.JLabel();
         jB_Search = new javax.swing.JButton();
-        tF_SearchBar = new java.awt.TextField();
+        tF_SearchBar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jT_VOIdata = new javax.swing.JTable();
@@ -97,8 +97,13 @@ public class MainScreen extends javax.swing.JFrame {
 
         jB_Search.setText("Search");
         jB_Search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jB_Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SearchActionPerformed(evt);
+            }
+        });
 
-        tF_SearchBar.setText("textField2");
+        tF_SearchBar.setText("Enter License");
 
         javax.swing.GroupLayout jP_TopPanelLayout = new javax.swing.GroupLayout(jP_TopPanel);
         jP_TopPanel.setLayout(jP_TopPanelLayout);
@@ -107,9 +112,9 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jP_TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jL_ShieldImage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 529, Short.MAX_VALUE)
-                .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -118,9 +123,9 @@ public class MainScreen extends javax.swing.JFrame {
             .addComponent(jL_ShieldImage)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_TopPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jP_TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jP_TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tF_SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -412,7 +417,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addComponent(jP_Management, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(90, Short.MAX_VALUE))
+                        .addContainerGap(96, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -471,6 +476,8 @@ public class MainScreen extends javax.swing.JFrame {
             int row = jT_VOIdata.getSelectedRow();
             String licensePlate = (String) jT_VOIdata.getModel().getValueAt(row, 0);
             voi_c.deleteVehicleOfInterest(licensePlate);
+            JOptionPane.showMessageDialog(this, "VOI with License: '" + licensePlate + "' deleted!");
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"No VOI Selected!");
         }
@@ -493,6 +500,20 @@ public class MainScreen extends javax.swing.JFrame {
         createdVOI.show();
 
     }//GEN-LAST:event_jB_EditSelectedVOIActionPerformed
+
+    private void jB_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SearchActionPerformed
+    String search = this.tF_SearchBar.getText();
+    String [] result = voi_c.getVehicleOfInterestByLicenase(search);
+
+        //Opens up an edit window for the searched for VOI
+        try {
+            JF_ManageVOI view = new JF_ManageVOI(result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7]);
+            view.show();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"License Plate: '"+search+"' not found!");
+        }
+
+    }//GEN-LAST:event_jB_SearchActionPerformed
 
     private void updateTable() {
         String voiData[][] = voi_c.allVehicleOfInterest();
@@ -591,6 +612,6 @@ public class MainScreen extends javax.swing.JFrame {
     private java.awt.Panel jP_TopPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jT_VOIdata;
-    private java.awt.TextField tF_SearchBar;
+    private javax.swing.JTextField tF_SearchBar;
     // End of variables declaration//GEN-END:variables
 }
