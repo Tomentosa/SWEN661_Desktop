@@ -59,14 +59,8 @@ public class MainScreen extends javax.swing.JFrame {
         jMI_AddNew = new javax.swing.JMenuItem();
         jMI_EditSelected = new javax.swing.JMenuItem();
         jMI_DeleteSelected = new javax.swing.JMenuItem();
-        jM_VOI1 = new javax.swing.JMenu();
-        jMI_AddNew1 = new javax.swing.JMenuItem();
-        jMI_EditSelected1 = new javax.swing.JMenuItem();
-        jMI_DeleteSelected1 = new javax.swing.JMenuItem();
-        jM_VOI2 = new javax.swing.JMenu();
-        jMI_AddNew2 = new javax.swing.JMenuItem();
-        jMI_EditSelected2 = new javax.swing.JMenuItem();
-        jMI_DeleteSelected2 = new javax.swing.JMenuItem();
+        jMI_Reason = new javax.swing.JMenuItem();
+        jMI_MakeModel = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -325,12 +319,22 @@ public class MainScreen extends javax.swing.JFrame {
         jM_VOI.setText("Vehicles of Interest (VOI)     ");
 
         jMI_AddNew.setText("Add  NEW");
+        jMI_AddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMI_AddNewActionPerformed(evt);
+            }
+        });
         jM_VOI.add(jMI_AddNew);
 
         jMI_EditSelected.setText("Edit Selected");
+        jMI_EditSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMI_EditSelectedActionPerformed(evt);
+            }
+        });
         jM_VOI.add(jMI_EditSelected);
 
-        jMI_DeleteSelected.setText("Remove Selected");
+        jMI_DeleteSelected.setText("Delete Selected");
         jMI_DeleteSelected.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMI_DeleteSelectedActionPerformed(evt);
@@ -340,41 +344,21 @@ public class MainScreen extends javax.swing.JFrame {
 
         jM_Manage.add(jM_VOI);
 
-        jM_VOI1.setText("Reasons for Interest");
-
-        jMI_AddNew1.setText("Add  NEW");
-        jM_VOI1.add(jMI_AddNew1);
-
-        jMI_EditSelected1.setText("Edit Reasons");
-        jM_VOI1.add(jMI_EditSelected1);
-
-        jMI_DeleteSelected1.setText("Remove Reasons");
-        jMI_DeleteSelected1.addActionListener(new java.awt.event.ActionListener() {
+        jMI_Reason.setText("Manage Reason for Interest");
+        jMI_Reason.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMI_DeleteSelected1ActionPerformed(evt);
+                jMI_ReasonActionPerformed(evt);
             }
         });
-        jM_VOI1.add(jMI_DeleteSelected1);
+        jM_Manage.add(jMI_Reason);
 
-        jM_Manage.add(jM_VOI1);
-
-        jM_VOI2.setText("Vehicle Make / Models");
-
-        jMI_AddNew2.setText("Add  NEW");
-        jM_VOI2.add(jMI_AddNew2);
-
-        jMI_EditSelected2.setText("Edit Reasons");
-        jM_VOI2.add(jMI_EditSelected2);
-
-        jMI_DeleteSelected2.setText("Remove Reasons");
-        jMI_DeleteSelected2.addActionListener(new java.awt.event.ActionListener() {
+        jMI_MakeModel.setText("Manage Make / Model");
+        jMI_MakeModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMI_DeleteSelected2ActionPerformed(evt);
+                jMI_MakeModelActionPerformed(evt);
             }
         });
-        jM_VOI2.add(jMI_DeleteSelected2);
-
-        jM_Manage.add(jM_VOI2);
+        jM_Manage.add(jMI_MakeModel);
 
         jMB_TopLeftMenu.add(jM_Manage);
 
@@ -436,16 +420,18 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMI_DeleteSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_DeleteSelectedActionPerformed
-        // TODO add your handling code here:
+        //stores the value of the row the user has clicked
+        try {
+            int row = jT_VOIdata.getSelectedRow();
+            String licensePlate = (String) jT_VOIdata.getModel().getValueAt(row, 0);
+            voi_c.deleteVehicleOfInterest(licensePlate);
+            JOptionPane.showMessageDialog(this, "VOI with License: '" + licensePlate + "' deleted!");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"No VOI Selected!");
+        }
+        this.updateTable();
     }//GEN-LAST:event_jMI_DeleteSelectedActionPerformed
-
-    private void jMI_DeleteSelected1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_DeleteSelected1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMI_DeleteSelected1ActionPerformed
-
-    private void jMI_DeleteSelected2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_DeleteSelected2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMI_DeleteSelected2ActionPerformed
 
     private void jB_ViewReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ViewReasonActionPerformed
         JF_ManageReason reason = new JF_ManageReason();
@@ -514,6 +500,37 @@ public class MainScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jB_SearchActionPerformed
+
+    private void jMI_AddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_AddNewActionPerformed
+        JF_ManageVOI createdVOI = new JF_ManageVOI();
+        createdVOI.show();
+    }//GEN-LAST:event_jMI_AddNewActionPerformed
+
+    private void jMI_EditSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_EditSelectedActionPerformed
+        int row = jT_VOIdata.getSelectedRow();
+        
+        String alertType    = jT_VOIdata.getModel().getValueAt(row, 1).toString();
+        String licensePlate = jT_VOIdata.getModel().getValueAt(row, 0).toString();
+        String make         = jT_VOIdata.getModel().getValueAt(row, 2).toString();
+        String model        = jT_VOIdata.getModel().getValueAt(row, 3).toString();
+        String year         = jT_VOIdata.getModel().getValueAt(row, 4).toString();
+        String color        = jT_VOIdata.getModel().getValueAt(row, 5).toString();
+        String ownersName   = jT_VOIdata.getModel().getValueAt(row, 6).toString();
+        String ownersPhone  = jT_VOIdata.getModel().getValueAt(row, 7).toString();
+
+        JF_ManageVOI createdVOI = new JF_ManageVOI(licensePlate, alertType, make, model, year, color, ownersName, ownersPhone);
+        createdVOI.show();
+    }//GEN-LAST:event_jMI_EditSelectedActionPerformed
+
+    private void jMI_ReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_ReasonActionPerformed
+        JF_ManageReason reason = new JF_ManageReason();
+        reason.show();
+    }//GEN-LAST:event_jMI_ReasonActionPerformed
+
+    private void jMI_MakeModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_MakeModelActionPerformed
+        JF_ManageMakeModel makeModel = new JF_ManageMakeModel();
+        makeModel.show();
+    }//GEN-LAST:event_jMI_MakeModelActionPerformed
 
     private void updateTable() {
         String voiData[][] = voi_c.allVehicleOfInterest();
@@ -592,20 +609,14 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMB_TopLeftMenu;
     private javax.swing.JMenuItem jMI_AddNew;
-    private javax.swing.JMenuItem jMI_AddNew1;
-    private javax.swing.JMenuItem jMI_AddNew2;
     private javax.swing.JMenuItem jMI_DeleteSelected;
-    private javax.swing.JMenuItem jMI_DeleteSelected1;
-    private javax.swing.JMenuItem jMI_DeleteSelected2;
     private javax.swing.JMenuItem jMI_EditSelected;
-    private javax.swing.JMenuItem jMI_EditSelected1;
-    private javax.swing.JMenuItem jMI_EditSelected2;
+    private javax.swing.JMenuItem jMI_MakeModel;
+    private javax.swing.JMenuItem jMI_Reason;
     private javax.swing.JMenuItem jMI_RefreshTable;
     private javax.swing.JMenu jM_File;
     private javax.swing.JMenu jM_Manage;
     private javax.swing.JMenu jM_VOI;
-    private javax.swing.JMenu jM_VOI1;
-    private javax.swing.JMenu jM_VOI2;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jP_Management;

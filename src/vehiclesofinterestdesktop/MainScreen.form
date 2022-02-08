@@ -49,15 +49,21 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add  NEW"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_AddNewActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMI_EditSelected">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Edit Selected"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_EditSelectedActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMI_DeleteSelected">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Remove Selected"/>
+                    <Property name="text" type="java.lang.String" value="Delete Selected"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_DeleteSelectedActionPerformed"/>
@@ -65,56 +71,22 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jM_VOI1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMI_Reason">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Reasons for Interest"/>
+                <Property name="text" type="java.lang.String" value="Manage Reason for Interest"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_AddNew1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Add  NEW"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_EditSelected1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Edit Reasons"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_DeleteSelected1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Remove Reasons"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_DeleteSelected1ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="jM_VOI2">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_ReasonActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMI_MakeModel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Vehicle Make / Models"/>
+                <Property name="text" type="java.lang.String" value="Manage Make / Model"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_AddNew2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Add  NEW"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_EditSelected2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Edit Reasons"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMI_DeleteSelected2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Remove Reasons"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_DeleteSelected2ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMI_MakeModelActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
